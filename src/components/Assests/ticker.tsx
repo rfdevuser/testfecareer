@@ -41,7 +41,7 @@ const TickerWrapper: React.FC = () => {
         <div className="hmove">
           {fetchedNewsItems.map((item, index) => (
             <div key={index} className="hitem">
-              {item}
+              {item.title}
             </div>
           ))}
           {/* <div className="hitem">New fashion design course for 2024-2025 batch starting next month! Enroll now!</div>

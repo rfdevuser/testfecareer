@@ -26,7 +26,7 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
     relevantExperience: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<any>) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
       setFormData((prevData) => ({
@@ -43,7 +43,7 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
 
     // Validation logic

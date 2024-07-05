@@ -6,6 +6,28 @@ import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { Watch } from 'react-loader-spinner';
 // import Loader from 'react-loader-spinner';
+interface FormData {
+  
+  jobID: string;
+  name: string;
+  email: string;
+  contactNumber: string;
+  currentCity: string;
+  highestQualification: string;
+  gender: string;
+  isStudent: string;
+  isWorkingProfessional: string;
+  passingYear: string;
+  relevantExperience: string;
+  question1: string;
+  question2: string;
+  question3: string;
+  question4: string;
+  question5: string;
+  resume: string;
+  consent: boolean;
+}
+
 const QuestionForm = ({ params }: { params: { id: string } }) => {
   const searchParams = useSearchParams();
 
@@ -29,6 +51,7 @@ const QuestionForm = ({ params }: { params: { id: string } }) => {
 
   // State to manage form data
   const [formData, setFormData] = useState({
+   
     jobID: jobID || '',
     name: name || '',
     email: email || '',
@@ -53,7 +76,7 @@ const QuestionForm = ({ params }: { params: { id: string } }) => {
   const [addCandidate, { loading: mutationLoading }] = useMutation(ADD_CANDIDATE_RESPONSE_MUTATION);
 
   // Function to handle input changes in the form
-  const handleInputChange = (e) => {
+  const handleInputChange = (e:any) => {
     const { name, value, type, checked, files } = e.target;
     if (type === 'checkbox') {
       setFormData((prevData) => ({
@@ -74,13 +97,12 @@ const QuestionForm = ({ params }: { params: { id: string } }) => {
   };
 
   // Function to handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     try {
       // Disable the submit button during mutation loading
-      const submitButton = document.getElementById('submit-button');
+      const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
       if (submitButton) submitButton.disabled = true;
-
       const { data } = await addCandidate({
         variables: {
           answer1: formData.question1.toString(),
@@ -120,8 +142,8 @@ const QuestionForm = ({ params }: { params: { id: string } }) => {
       alert('Error submitting form. Please try again later.');
     } finally {
       // Enable the submit button after submission (whether success or failure)
-      const submitButton = document.getElementById('submit-button');
-      if (submitButton) submitButton.disabled = false;
+      const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
+      if (submitButton) submitButton.disabled = true;
     }
   };
 
@@ -164,7 +186,7 @@ const QuestionForm = ({ params }: { params: { id: string } }) => {
                     placeholder='Answer in your own words '
                     name={key}
                     className="border rounded-lg px-4 py-2 w-full border-gray-400 h-32 resize-none"
-                    value={formData[key]}
+                    value={formData[key as keyof FormData] as string} // Type assertion here
                     onChange={handleInputChange}
                   />
                 </div>
