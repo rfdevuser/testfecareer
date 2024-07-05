@@ -3,14 +3,15 @@ import { SINGLEJOBRESULT } from '@/utils/gql/GQL_QUERIES';
 import { useQuery } from '@apollo/client';
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Watch } from 'react-loader-spinner';
+
 
 const ApplyForm = ({ params }: { params: { id: string } }) => {
   const { loading, error, data } = useQuery(SINGLEJOBRESULT, {
     variables: { job_id: params.id },
   });
-  
+
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -25,6 +26,9 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
     passingYear: '',
     relevantExperience: '',
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [buttonText, setButtonText] = useState('Next');
 
   const handleChange = (e: React.ChangeEvent<any>) => {
     const { name, value, type, checked } = e.target;
@@ -43,8 +47,16 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  const handleSubmit = (e: React.ChangeEvent<any>) => {
+  const handleSubmit = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
+
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setButtonText('Please wait...');
 
     // Validation logic
     if (
@@ -57,9 +69,8 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
       ((formData.isStudent && formData.passingYear) ||
         (formData.isWorkingProfessional && formData.relevantExperience))
     ) {
-      console.log(formData.name)
       // Prepare data to pass to QuestionForm
-      const queryParams ={
+      const queryParams = {
         jobid: params.id,
         name: formData.name,
         email: formData.email,
@@ -72,30 +83,38 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
         passingYear: formData.passingYear,
         relevantExperience: formData.relevantExperience.toString(),
       };
+
       const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-      .join('&');
-      console.log("queryParams",queryParams)
-      
-      router.push(`/QuestionForm?${queryString} 
-      `);
-      // Optionally reset form data after submission
-      // setFormData({
-      //   name: '',
-      //   email: '',
-      //   contactNumber: '',
-      //   currentCity: '',
-      //   highestQualification: '',
-      //   gender: '',
-      //   isStudent: false,
-      //   isWorkingProfessional: false,
-      //   passingYear: '',
-      //   relevantExperience: '',
-      // });
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+
+      // Navigate to the next page
+      try {
+        await router.push(`/QuestionForm?${queryString}`);
+        // Optionally reset form data after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          contactNumber: '',
+          currentCity: '',
+          highestQualification: '',
+          gender: '',
+          isStudent: false,
+          isWorkingProfessional: false,
+          passingYear: '',
+          relevantExperience: '',
+        });
+      } catch (error) {
+        console.error('Error navigating to QuestionForm:', error);
+      }
     } else {
       alert('Please fill out all required fields.');
     }
+
+    setIsSubmitting(false);
+    setButtonText('Next');
   };
+
 
   if (loading) {
     // Show loader or shimmer effect while data is being fetched
@@ -293,8 +312,12 @@ console.log("this is what you want", formData)
         )}
         <div className="mt-6 flex justify-center">
         {/* <Link href={`/QuestionForm?id=${ params.id }`} as={`/QuestionForm/${params.id } `}> */}
-        <button className="flex items-center bg-pink-500 text-white gap-1 px-4 py-2 cursor-pointer text-gray-800 font-semibold tracking-widest rounded-md mt-10 hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3">
-                Next 
+        <button
+              type="submit"
+              disabled={isSubmitting}
+              className="flex items-center bg-pink-500 text-white gap-1 px-4 py-2 cursor-pointer text-gray-800 font-semibold tracking-widest rounded-md mt-10 hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3"
+            >
+              {buttonText}
                 <svg
                   className="w-5 h-5"
                   stroke="currentColor"

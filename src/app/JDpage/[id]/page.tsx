@@ -4,6 +4,7 @@ import { SINGLEJOBRESULT } from "@/utils/gql/GQL_QUERIES";
 
 import Link from "next/link";
 import { Watch } from "react-loader-spinner";
+import { useEffect } from "react";
 
 // Spinner component for loading indicator
 // const Spinner = () => (
@@ -11,6 +12,7 @@ import { Watch } from "react-loader-spinner";
 //     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-900"></div>
 //   </div>
 // );
+
 
 const JobDetails = ({ params }: { params: { id: string } }) => {
   const { loading, error, data } = useQuery(SINGLEJOBRESULT, {
@@ -57,8 +59,7 @@ const JobDetails = ({ params }: { params: { id: string } }) => {
   };
   
   
-  
-  
+ 
 
   return (
     <section className="bg-white text-black relative">
