@@ -13,7 +13,7 @@ const Hero = () => {
     <>
    <div>
         <div className="bg-hero  w-full h-full text-black max-h-550px bg-white transform  origin-top overflow-hidden z-0">
-        <div className='flex justify-center bg-[#831843] text-white'> 𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒕𝒐 𝑹𝑨𝑲𝑯𝑰𝑺 𝑭𝑨𝑺𝑯𝑰𝑶𝑵𝑺, 𝒘𝒉𝒆𝒓𝒆 𝒆𝒗𝒆𝒓𝒚 𝒔𝒕𝒊𝒕𝒄𝒉 𝒕𝒆𝒍𝒍𝒔 𝒂 𝒔𝒕𝒐𝒓𝒚 𝒐𝒇 𝒆𝒍𝒆𝒈𝒂𝒏𝒄𝒆 𝒂𝒏𝒅 𝒄𝒉𝒂𝒓𝒎.
+        <div className='flex justify-center bg-[#831843] text-white text-center'> 𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒕𝒐 𝑹𝑨𝑲𝑯𝑰𝑺 𝑭𝑨𝑺𝑯𝑰𝑶𝑵𝑺, 𝑾𝒆𝒂𝒓 𝑫𝒊𝒇𝒇𝒆𝒓𝒆𝒏𝒕, 𝑭𝒆𝒆𝒍 𝑺𝒑𝒆𝒄𝒊𝒂𝒍
         </div> 
       
       <div className=' bg-[#831843] z-0   '>
@@ -65,32 +65,37 @@ const Hero = () => {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
       }}>
-      <div className='absolute text-center w-30'>  𝒘𝒆 𝒃𝒆𝒍𝒊𝒆𝒗𝒆 𝒊𝒏 𝒇𝒐𝒔𝒕𝒆𝒓𝒊𝒏𝒈 𝒂 𝒄𝒖𝒍𝒕𝒖𝒓𝒆 𝒐𝒇 𝒄𝒓𝒆𝒂𝒕𝒊𝒗𝒊𝒕𝒚, 𝒊𝒏𝒏𝒐𝒗𝒂𝒕𝒊𝒐𝒏, 𝒂𝒏𝒅 𝒅𝒆𝒅𝒊𝒄𝒂𝒕𝒊𝒐𝒏. 𝑾𝒆 𝒂𝒓𝒆 𝒑𝒂𝒔𝒔𝒊𝒐𝒏𝒂𝒕𝒆 𝒂𝒃𝒐𝒖𝒕 𝒄𝒓𝒆𝒂𝒕𝒊𝒏𝒈 𝒆𝒙𝒄𝒆𝒑𝒕𝒊𝒐𝒏𝒂𝒍 𝒇𝒂𝒔𝒉𝒊𝒐𝒏 𝒆𝒙𝒑𝒆𝒓𝒊𝒆𝒏𝒄𝒆𝒔 𝒕𝒉𝒂𝒕 𝒓𝒆𝒔𝒐𝒏𝒂𝒕𝒆 𝒘𝒊𝒕𝒉 𝒐𝒖𝒓 𝒄𝒖𝒔𝒕𝒐𝒎𝒆𝒓𝒔 𝒘𝒐𝒓𝒍𝒅𝒘𝒊𝒅𝒆. 𝑨𝒔 𝒘𝒆 𝒄𝒐𝒏𝒕𝒊𝒏𝒖𝒆 𝒕𝒐 𝒈𝒓𝒐𝒘, 𝒘𝒆 𝒂𝒓𝒆 𝒍𝒐𝒐𝒌𝒊𝒏𝒈 𝒇𝒐𝒓 𝒕𝒂𝒍𝒆𝒏𝒕𝒆𝒅 𝒊𝒏𝒅𝒊𝒗𝒊𝒅𝒖𝒂𝒍𝒔 𝒘𝒉𝒐 𝒔𝒉𝒂𝒓𝒆 𝒐𝒖𝒓 𝒗𝒊𝒔𝒊𝒐𝒏 𝒂𝒏𝒅 𝒗𝒂𝒍𝒖𝒆𝒔 𝒕𝒐 𝒋𝒐𝒊𝒏 𝒐𝒖𝒓 𝒕𝒆𝒂𝒎.
+      <div className='absolute text-center w-30'> 
       </div></div>
       
       <div className='relative z-10  mt-90 flex items-center justify-center' style={{ 
-        backgroundImage: `url('/background/hero2.jpg')`,
+        backgroundImage: `url('/background/hero_2.png')`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        height:500,
+        height:700,
  
         zIndex: 0,
       }}>
-        
-      <Image
+        <div className='flex flex-col '>
+  <div className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl bg-clip-text text-transparent bg-gradient-to-t from-[#fcd34d] to-[#ffffff] -mt-20 text-center '> 𝑫𝒆𝒇𝒊𝒏𝒆 𝒀𝒐𝒖𝒓 𝑭𝒖𝒕𝒖𝒓𝒆</div>
+       <div className='bg-clip-text text-transparent bg-gradient-to-t from-[#fecaca] to-[#ffffff] text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl flex justify-center mt-3  text-center'>--𝙟𝙤𝙞𝙣 𝙪𝙨 𝙞𝙣 𝙩𝙝𝙚 𝙥𝙪𝙧𝙨𝙪𝙞𝙩 𝙤𝙛 𝙖𝙬𝙚𝙨𝙤𝙢𝙚 𝙖𝙙𝙫𝙚𝙣𝙩𝙪𝙧𝙚𝙨--</div>
+        </div>
+        </div>    
+    <Image
           src="/logos/rf.png"
           alt='logo'
           height={600}
           width={600}
-          className='z-100 -mt-20 shadow-xd '
+          className='z-100 mt-0 shadow-xd mx-auto '
           style={{ opacity: 5 ,    zIndex: 10 }} 
           loading='lazy'
           
         />
-        </div>
       </div>
+   
       </div>
+      
       </div>
      
     </>

@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import  { Suspense, useState } from "react";
 import { Watch } from 'react-loader-spinner';
 import next from 'next';
+import { sendEmail } from '@/email/sendEmail';
 // import Loader from 'react-loader-spinner';
 interface FormData {
   
@@ -30,6 +31,7 @@ interface FormData {
 }
 
 const QuestionPage = ({ params }: { params: { id: string } }) => {
+
 
   const searchParams = useSearchParams();
  
@@ -123,10 +125,25 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
           email: formData.email.toString(),
           gender: formData.gender.toString(),
           name: formData.name.toString(),
-          resume: formData.resume, // Ensure boolean to string conversion
+          resume: formData.resume, 
         },
       });
+      const emailData = {
+        to_email: formData.email,
+        to_name: formData.name,
+        to_jobid: formData.jobID,
+        from_name: 'RAKHIS FASHIONS',
+        reply_to: 'no-reply@rakhisfashions.com',
+        subject: 'Application Submitted Successfully',
+        message: 'In the middle of difficulty lies opportunity. - Albert Einstein',
+      };
+
+      // Send email using EmailJS
+      await sendEmail(emailData);
+
       console.log('Form submitted successfully:', data);
+
+      
       alert('Form submitted successfully!');
       // Clear form data after successful submission
       setFormData({
@@ -142,13 +159,14 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
     } catch (error) {
       console.error('Form submission failed:', error);
       alert('Error submitting form. Please try again later.');
+    
     } finally {
       // Enable the submit button after submission (whether success or failure)
       const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
       if (submitButton) submitButton.disabled = true;
     }
   };
-
+  
   if (loading) {
     // Show loader or shimmer effect while data is being fetched
     return (
@@ -182,7 +200,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
             if (key.startsWith('question')) {
               return (
                 <div key={key} className="mb-4">
-                  <label htmlFor={key} className="block text-lg font-bold mb-2">{data.jobInfo[key]}</label>
+                  <label htmlFor={key} className="block text-lg text-black font-bold mb-2">{data.jobInfo[key]}</label>
                   <textarea
                     id={key}
                     placeholder='Answer in your own words '
@@ -198,7 +216,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
           })}
 
           <div className="mb-4">
-            <label htmlFor="resume" className="block text-lg font-bold mb-2">Upload Resume</label>
+            <label htmlFor="resume" className="block text-lg text-black font-bold mb-2">Upload Resume</label>
             <input
               type="text"
               id="resume"

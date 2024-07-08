@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#fbcfe8] ">
+    <nav className="bg-[#ffe4e6] ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="  flex-shrink-0 ">
           <a href="/" className="text-white text-3xl font-bold">
@@ -99,43 +99,43 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden mt-4">
           <a
-            href="#"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            href="/"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
            HOME
           </a>
           <a
-            href="#"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            href="./UspPage"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
            LIFE AT RAKHIS FASHIONS
           </a>
           <a
             href="https://www.onati-global.com/"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
         ONATI GLOBAL
           </a>
           <a
             href="https://www.rebblebee.com/KidsGirlsClothes"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
            REBBLEBEE
           </a>
           <a
             href="https://www.wetailor4u.com/"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
            WETAILOR4U
           </a>
           <a
             href="https://www.ogiftbangalore.com/"
-            className="block mt-4 text-white  hover:text-[#500724]"
+            className="block mt-4 text-[#831843]  hover:text-[#500724]"
             onClick={handleLinkClick} // Close menu on link click
           >
         OGIFT

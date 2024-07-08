@@ -16,7 +16,7 @@ const founder = {
 const AboutFounder = () => {
   return (
     <section className="pb-10 pt-10 relative bg-[#fbcfe8]  "style={{ 
-      backgroundImage: `url('/background/founderbg.jpeg')`,
+      backgroundImage: `url('/background/founderbg.jpg')`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
