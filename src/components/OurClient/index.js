@@ -13,7 +13,7 @@ const OurClient = () => {
 
     return (
         <div>
-            <div className='text-3xl flex justify-center mt-10 mb-6'>𝑭𝒆𝒘 𝒐𝒇 𝑶𝒖𝒓 𝑪𝒍𝒊𝒆𝒏𝒕𝒔</div>
+            <div className='text-3xl flex justify-center mt-10 mb-6 bg-white'>𝑭𝒆𝒘 𝒐𝒇 𝑶𝒖𝒓 𝑪𝒍𝒊𝒆𝒏𝒕𝒔</div>
             <div className='flex flex-row flex-wrap gap-8 justify-center border-2 border-[#500724] p-4 bg-[#500724] shadow-xl'>
                 {Object.keys(Imageobj).map((key) => (
                     <div key={key}>

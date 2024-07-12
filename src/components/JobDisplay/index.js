@@ -32,7 +32,7 @@ const JobDisplay = () => {
   return (
     <>
     <div className='bg-white text-black text-3xl flex items-center justify-center '>𝑱𝒐𝒊𝒏 𝒐𝒖𝒕 𝑻𝒆𝒂𝒎</div>
-    <div className='bg-white text-black gap-4 flex justify-center flex-wrap mt-2'>
+    <div className='bg-white text-black gap-4 flex justify-center flex-wrap pt-6'>
     {data && data.querryofalljobs.map((job, index) => (
   <JobCard key={job.id} title={job.job_title} id={job.job_id} brief={job.job_brief} />
 ))}
