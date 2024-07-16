@@ -228,8 +228,8 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
             <p className="text-sm text-red-600 mt-1">(Upload the drive link of your resume, make sure it is in public directory)</p>
           </div>
 
-          <div className="mb-4">
-          <label htmlFor="consent" className="block text-lg font-bold mb-2">
+          <div className="mb-4 text-black">
+          <label htmlFor="consent" className="block text-lg font-bold mb-2 text-black">
     <input
       type="checkbox"
       id="consent"
