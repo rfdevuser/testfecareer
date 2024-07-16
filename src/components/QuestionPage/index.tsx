@@ -205,7 +205,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
                     id={key}
                     placeholder='Answer in your own words '
                     name={key}
-                    className="border rounded-lg px-4 py-2 w-full border-gray-400 h-32 resize-none"
+                    className="border rounded-lg px-4 py-2 w-full border-gray-400 h-32 resize-none bg-white text-black"
                     value={formData[key as keyof FormData] as string} // Type assertion here
                     onChange={handleInputChange}
                   />
@@ -222,24 +222,25 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
               id="resume"
               name="resume"
               placeholder='Add resume link '
-              className="border border-gray-400 rounded-lg px-4 py-2 w-full"
+              className="border border-gray-400 rounded-lg px-4 py-2 w-full bg-white text-black"
               onChange={handleInputChange}
             />
             <p className="text-sm text-red-600 mt-1">(Upload the drive link of your resume, make sure it is in public directory)</p>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="consent" className="block text-lg font-bold mb-2">
-              <input
-                type="checkbox"
-                id="consent"
-                name="consent"
-                className="mr-2"
-                checked={formData.consent}
-                onChange={handleInputChange}
-              />
-              I agree that the information provided is correct and agree to all terms and conditions.
-            </label>
+          <label htmlFor="consent" className="block text-lg font-bold mb-2">
+    <input
+      type="checkbox"
+      id="consent"
+      name="consent"
+      className="mr-2"
+      checked={formData.consent}
+      onChange={handleInputChange}
+      required // Adding the required attribute
+    />
+    I agree that the information provided is correct and agree to all terms and conditions.
+  </label>
           </div>
 
           <div className="mb-4 text-center">

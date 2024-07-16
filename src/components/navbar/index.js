@@ -73,6 +73,13 @@ const Navbar = () => {
             >
              OGIFT
             </a>
+            <a
+              href="https://www.linkedin.com/company/onatiglobal/"
+              className="block mt-4 lg:inline-block lg:mt-0  text-black  hover:text-[#500724] mx-3" 
+              onClick={handleLinkClick} // Close menu on link click
+            >
+             LINKEDIN
+            </a>
           </div>
           <div>
            
@@ -140,6 +147,13 @@ const Navbar = () => {
           >
         OGIFT
           </a>
+          <a
+              href="https://www.linkedin.com/company/onatiglobal/"
+             className="block mt-4 text-[#831843]  hover:text-[#500724]"
+              onClick={handleLinkClick} // Close menu on link click
+            >
+            LINKEDIN
+            </a>
           <div className="mt-4">
         
           
