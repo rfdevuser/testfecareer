@@ -134,7 +134,7 @@ const ApplyForm = ({ params }: { params: { id: string } }) => {
     );
   }
   if (error) return <p>Error: {error.message}</p>;
-console.log("this is what you want", formData)
+
   return (
     <section
     className="bg-[#fce7f3] text-black relative "

@@ -79,7 +79,7 @@ body {
 /* (A3) COSMETICS - NOT IMPORTANT */
 .hwrap {
   font-family: "Courier New", Courier, monospace;
-  color: #fff;
+  color: white;
   background: #831843;
   max-width: 100%; /* highly recommended */
 }
@@ -127,7 +127,7 @@ body {
 #cbinfo a{
   text-decoration:none;
   padding:5px;
-  color:#fff;
+  color:white;
   background:#a91616;
 }
 
