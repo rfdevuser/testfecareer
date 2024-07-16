@@ -2,7 +2,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { SINGLEJOBRESULT } from "@/utils/gql/GQL_QUERIES";
 import { ADD_CANDIDATE_RESPONSE_MUTATION } from "@/utils/gql/GQL_MUTATION";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import  { Suspense, useState } from "react";
 import { Watch } from 'react-loader-spinner';
 import next from 'next';
@@ -34,7 +34,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
 
 
   const searchParams = useSearchParams();
- 
+  const router = useRouter();
   // Fetching jobID and other parameters from URL
   const jobID = searchParams.get('jobid');
   const name = searchParams.get('name');
@@ -156,6 +156,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
         resume: '',
         consent: false,
       });
+      router.push('/');
     } catch (error) {
       console.error('Form submission failed:', error);
       alert('Error submitting form. Please try again later.');
