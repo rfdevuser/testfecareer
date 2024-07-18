@@ -225,6 +225,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
               placeholder='Add resume link '
               className="border border-gray-400 rounded-lg px-4 py-2 w-full bg-white text-black"
               onChange={handleInputChange}
+              required
             />
             <p className="text-sm text-red-600 mt-1">(Upload the drive link of your resume, make sure it is in public directory)</p>
           </div>
