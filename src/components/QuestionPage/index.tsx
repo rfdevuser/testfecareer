@@ -7,6 +7,8 @@ import  { Suspense, useState } from "react";
 import { Watch } from 'react-loader-spinner';
 import next from 'next';
 import { sendEmail } from '@/email/sendEmail';
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "@/firebase";
 // import Loader from 'react-loader-spinner';
 interface FormData {
   
@@ -32,7 +34,7 @@ interface FormData {
 
 const QuestionPage = ({ params }: { params: { id: string } }) => {
 
-
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
   // Fetching jobID and other parameters from URL
@@ -98,6 +100,20 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
         [name]: value,
       }));
     }
+  };
+  const uploadFile = () => {
+    if (imageUpload === null) return;
+    
+    const imageName = `${contactNumber}`;
+    const imageRef = ref(storage, `images/${imageName}`);
+    
+    uploadBytes(imageRef, imageUpload).then(() => {
+      console.log(`Uploaded ${imageName} successfully!`);
+      // Optionally add further actions after successful upload
+    }).catch((error) => {
+      console.error("Error uploading image: ", error);
+      // Handle errors here
+    });
   };
 
   // Function to handle form submission
@@ -209,6 +225,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
                     className="border rounded-lg px-4 py-2 w-full border-gray-400 h-32 resize-none bg-white text-black"
                     value={formData[key as keyof FormData] as string} // Type assertion here
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
               );
@@ -217,7 +234,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
           })}
 
           <div className="mb-4">
-            <label htmlFor="resume" className="block text-lg text-black font-bold mb-2">Upload Resume</label>
+            <label htmlFor="resume" className="block text-lg text-black font-bold mb-2">Upload Linkedin Profile / portfolio Link</label>
             <input
               type="text"
               id="resume"
@@ -225,11 +242,24 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
               placeholder='Add resume link '
               className="border border-gray-400 rounded-lg px-4 py-2 w-full bg-white text-black"
               onChange={handleInputChange}
-              required
+              
             />
-            <p className="text-sm text-red-600 mt-1">(Upload the drive link of your resume, make sure it is in public directory)</p>
+            <p className="text-sm text-red-600 mt-1">(Upload the Linkedin/Portfolio link )</p>
           </div>
-
+          <div>
+          <label htmlFor="resume" className="block text-lg text-black font-bold mb-2">Upload Resume</label>
+          <input
+        type="file"
+        required
+        onChange={(event) => {
+          if (event.target.files && event.target.files.length > 0) {
+            setImageUpload(event.target.files[0]);
+          }
+        }}
+      />
+      {/* <button   className="bg-pink-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-pink-600 transition duration-300" onClick={uploadFile}>Upload Image</button> */}
+      <p className="text-sm text-red-600 mt-1">(Upload the resume in pdf format )</p>
+          </div>
           <div className="mb-4 text-black">
           <label htmlFor="consent" className="block text-lg font-bold mb-2 text-black">
     <input
@@ -251,6 +281,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
               type="submit"
               className="bg-pink-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-pink-600 transition duration-300"
               disabled={mutationLoading} // Disable the button when mutation is loading
+              onClick={uploadFile}
             >
               {mutationLoading ? (
                 <span>Submitting...</span> // Show loading text when mutation is in progress
