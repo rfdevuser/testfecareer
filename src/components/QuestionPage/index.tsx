@@ -34,6 +34,13 @@ interface FormData {
 
 const QuestionPage = ({ params }: { params: { id: string } }) => {
 
+  const LoadingSpinner = () => {
+    return (
+      <div className="fixed top-0 left-0 z-50 w-screen h-screen flex justify-center items-center bg-black bg-opacity-50">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  };
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -183,7 +190,22 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
       if (submitButton) submitButton.disabled = true;
     }
   };
-  
+  // if (mutationLoading) {
+  //   // Show loader or shimmer effect while data is being fetched
+  //   return (
+  //     <div className="container mx-auto p-4 flex justify-center">
+  //       <Watch
+  // visible={true}
+  // height="80"
+  // width="80"
+  // radius="48"
+  // color="#500724"
+  // ariaLabel="watch-loading"
+  // wrapperStyle={{}}
+  // wrapperClass=""
+  // />
+  //    
+
   if (loading) {
     // Show loader or shimmer effect while data is being fetched
     return (
@@ -205,6 +227,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="container mx-auto p-4">
+        {mutationLoading && <LoadingSpinner />}
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-[#500724] text-white p-4">
           <div className="text-3xl font-bold mb-2 text-center">{data.jobInfo.job_title}</div>
