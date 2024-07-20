@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { SINGLEJOBRESULT } from "@/utils/gql/GQL_QUERIES";
 import { ADD_CANDIDATE_RESPONSE_MUTATION } from "@/utils/gql/GQL_MUTATION";
 import { useRouter, useSearchParams } from "next/navigation";
-import  { Suspense, useState } from "react";
+import  { Suspense, useEffect, useState } from "react";
 import { Watch } from 'react-loader-spinner';
 import next from 'next';
 import { sendEmail } from '@/email/sendEmail';
@@ -35,6 +35,8 @@ interface FormData {
 const QuestionPage = ({ params }: { params: { id: string } }) => {
 
   const LoadingSpinner = () => {
+   
+
     return (
       <div className="fixed top-0 left-0 z-50 w-screen h-screen flex justify-center items-center bg-black bg-opacity-50">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
@@ -61,7 +63,8 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
   const { data, loading, error } = useQuery(SINGLEJOBRESULT, {
     variables: { job_id: jobID },
   });
-
+  const [timerRunning, setTimerRunning] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   // State to manage form data
   const [formData, setFormData] = useState({
    
@@ -122,12 +125,18 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
       // Handle errors here
     });
   };
-
+ 
+  useEffect(() => {
+    setTimeout(() => {
+      setTimerRunning(false);
+    }, 30000); // 30 seconds
+  }, [submitting]);
   // Function to handle form submission
   const handleSubmit = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     try {
       // Disable the submit button during mutation loading
+      setSubmitting(true)
       const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
       if (submitButton) submitButton.disabled = true;
       const { data } = await addCandidate({
@@ -164,7 +173,6 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
       // Send email using EmailJS
       await sendEmail(emailData);
 
-      console.log('Form submitted successfully:', data);
 
       
       alert('Form submitted successfully!');
@@ -303,7 +311,7 @@ const QuestionPage = ({ params }: { params: { id: string } }) => {
               id="submit-button" // Add an ID to the submit button
               type="submit"
               className="bg-pink-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-pink-600 transition duration-300"
-              disabled={mutationLoading} // Disable the button when mutation is loading
+              disabled={mutationLoading || submitting || !timerRunning}// Disable the button when mutation is loading
               onClick={uploadFile}
             >
               {mutationLoading ? (
